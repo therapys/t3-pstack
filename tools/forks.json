@@ -74,7 +74,7 @@
     },
     "plugins/pstack/skills/setup-pstack/SKILL.md": {
       "kind": "port-feature",
-      "why": "Writes the T3 model sheet from orchestrator_capabilities targets and checks it with t3-sheet.mjs, in place of Cursor's always-applied .mdc rule built from model slugs.",
+      "why": "Writes the T3 model sheet from orchestrator_capabilities targets for Claude Code, Codex, or Pi and checks it with t3-sheet.mjs, in place of Cursor's always-applied .mdc rule built from model slugs.",
       "since": "2.0.0-rc.1",
       "upstream": "not-proposed"
     }
