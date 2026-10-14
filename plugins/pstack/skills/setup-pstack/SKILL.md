@@ -5,13 +5,13 @@ description: Configure which T3 provider and model pstack uses per role and at w
 
 # Setup pstack
 
-Write the model sheet, `t3-pstack-models.md` in the host's config directory (`$CLAUDE_CONFIG_DIR` or `~/.claude` on Claude Code, `$CODEX_HOME` or `~/.codex` on Codex). It sets pstack's T3 provider and model per role, and every pstack skill reads it before it dispatches.
+Write the model sheet, `t3-pstack-models.md` in the host's config directory (`$CLAUDE_CONFIG_DIR` or `~/.claude` on Claude Code, `$CODEX_HOME` or `~/.codex` on Codex, `$PI_CODING_AGENT_DIR` or `~/.pi/agent` on Pi). It sets pstack's T3 provider and model per role, and every pstack skill reads it before it dispatches.
 
 ## Steps
 
 ### 1. Detect available models
 
-Call `orchestrator_capabilities`, or `acp-mcp-call orchestrator_capabilities '{}'` where the T3 tools are not exposed. Its provider instances and their models are the dependable source. A target is valid only when its provider instance can run a child task and lists the model. Note each provider's own option IDs and values, such as `effort` on Claude and `reasoningEffort` on Codex and Grok. Never write a target you have not seen there. The aliases `inherit-parent` and `auto` are always valid.
+Call `orchestrator_capabilities` (`mcp__t3-code__orchestrator_capabilities` on Pi), or `acp-mcp-call orchestrator_capabilities '{}'` where the T3 tools are not exposed. Its provider instances and their models are the dependable source. A target is valid only when its provider instance can run a child task and lists the model. Note each provider's own option IDs and values, such as `effort` on Claude and `reasoningEffort` on Codex and Grok. Never write a target you have not seen there. The aliases `inherit-parent` and `auto` are always valid.
 
 ### 2. Load current state
 
@@ -38,7 +38,7 @@ Write the candidate to a temp file. Call `orchestrator_capabilities` again and s
 
 ### 5. Write the sheet
 
-Overwrite the sheet with the candidate, writing through any symlink at its path (resolve it with `realpath`). One sheet serves both hosts, so link the other host's sheet path to it with `ln -s`. If a different file is already there, run the checker on it and ask before you replace it. Overwrite the whole file so re-runs stay idempotent. On Codex, remove any pstack model rows an earlier setup pasted into `<codex-home>/AGENTS.md`. With every default kept, the sheet reads:
+Overwrite the sheet with the candidate, writing through any symlink at its path (resolve it with `realpath`). One sheet can serve all hosts, so offer to link another host's sheet path to it with `ln -s`. If a different file is already there, run the checker on it and ask before you replace it. Overwrite the whole file so re-runs stay idempotent. On Codex, remove any pstack model rows an earlier setup pasted into `<codex-home>/AGENTS.md`. With every default kept, the sheet reads:
 
 ```markdown
 # pstack model configuration (T3). One line per role. Delete a line to fall back to the skill default.

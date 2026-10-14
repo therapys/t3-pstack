@@ -2,6 +2,12 @@
 
 This file is the release changelog, with one `## <version> - <title>` entry per release, newest first. The Cursor-to-T3 rewrite rules live in [`tools/substitutions.json`](tools/substitutions.json), and the [sync boundary](CONTRIBUTING.md#the-sync-boundary) in `CONTRIBUTING.md` defines how a change to upstream's skill content is declared.
 
+## 2.0.0-pi.1 - Pi harness support inside T3 Code
+
+This public fork of chhoumann/t3-pstack adds a Git-installable Pi package exposing the bundled skills and a small routing extension. The extension activates only when T3's namespaced orchestration tools are registered, preserves the original system prompt, honors `session hook: off`, and names the absolute skill and persona paths. Delegation stays on T3's durable child threads, not local Pi subagents.
+
+Model-sheet instructions now include `$PI_CODING_AGENT_DIR` (default `~/.pi/agent`). Existing Claude Code and Codex packaging remains supported. Repository links point to therapys/t3-pstack; upstream authorship and licenses remain intact. The README documents installation, trust, and the native T3 Pi provider requirement. Unit tests cover package discovery, tool namespaces, prompt idempotence, and sheet encodings. Live T3 end-to-end execution is not yet verified.
+
 ## 2.0.0-rc.2 - Lauren's 0.15.24, four of Michael's rules, and three watch-pr fixes
 
 t3-pstack moves to Lauren Tan's pstack 0.15.24, cursor/plugins `1e5c90a`, for all three components. Only pstack changed upstream: the autopilot playbooks catch the operator up through `/ketchup` ([pstack #616](https://github.com/cursor/plugins/pull/616)), a new `/sharpen` skill aims a task before it starts ([pstack #615](https://github.com/cursor/plugins/pull/615)), and the version moves to 0.15.24 ([pstack #617](https://github.com/cursor/plugins/pull/617)). `bun tools/sync.mjs` wrote every change cleanly, and at `1e5c90a` each component's dry run reports no undeclared fork, no denylist hit, and no substitution that matches nothing.

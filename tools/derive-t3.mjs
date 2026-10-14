@@ -78,7 +78,8 @@ export const fenceUnder = (title, lang) => (lines) => {
 
 const SHEET =
   "A role line in the model sheet overrides each one. The sheet is `t3-pstack-models.md` in the host's config " +
-  "directory (`$CLAUDE_CONFIG_DIR` or `~/.claude` on Claude Code, `$CODEX_HOME` or `~/.codex` on Codex), and " +
+  "directory (`$CLAUDE_CONFIG_DIR` or `~/.claude` on Claude Code, `$CODEX_HOME` or `~/.codex` on Codex, " +
+  "`$PI_CODING_AGENT_DIR` or `~/.pi/agent` on Pi), and " +
   "`/setup-pstack` writes it. An entry is `<providerInstanceId>/<modelId>` plus `<optionId>=<value>` pairs, and it " +
   "maps onto `delegate_task`'s `target`, with the provider instance as `providerInstanceId`, the model as `model`, " +
   "and the pairs as `options`. It splits at its first `/`, so a model ID with its own `/`, such as OpenCode's " +
